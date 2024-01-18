@@ -2,7 +2,7 @@ import os
 from collections import Counter
 
 import pandas as pd
-from torch.utils.data import Dataset, ConcatDataset
+from torch.utils.data import ConcatDataset
 from tqdm import tqdm
 
 from datasets.deep_fashion import DeepFashion
@@ -14,7 +14,7 @@ from datasets.hm_personalised_fashion import HuMPersonalisedFashion
 from datasets.rp2k import RP2K
 from datasets.shopee import Shopee
 from datasets.stanford_cars import StanfordCars
-from datasets.stanford_online_products import StanfordProducts
+from datasets.stanford_products import StanfordProducts
 from datasets.storefronts146 import Storefronts146
 from datasets.transforms import build_transforms
 from datasets.food_recognition import FoodRecognition2022

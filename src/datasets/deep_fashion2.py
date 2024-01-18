@@ -81,4 +81,3 @@ if __name__ == "__main__":
 
     for image, cls in tqdm(dataloader):
         continue
-

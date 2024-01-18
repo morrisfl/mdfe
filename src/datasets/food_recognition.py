@@ -54,7 +54,6 @@ class FoodRecognition2022(Dataset):
                 self.df = self.df.drop(group.sample(len(group) - self.samples_per_cls).index)
 
 
-
 if __name__ == "__main__":
     data_root = "../../data"
     

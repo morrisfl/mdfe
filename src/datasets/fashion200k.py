@@ -70,7 +70,6 @@ class Fashion200k(Dataset):
         return len(ids), ids
 
 
-
 if __name__ == "__main__":
     data_root = "../../data"
 
