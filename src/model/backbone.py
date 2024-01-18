@@ -3,7 +3,6 @@ import torch
 from torch import nn
 import timm
 
-
 OUTPUT_DIM = {
     "ViT-B-16": 768,
     "ViT-L-14": 1024,
@@ -91,7 +90,7 @@ class SAMViT(nn.Module):
         return embeddings
 
 
-class ConvNext(nn.Module):
+class OpenClipConvNext(nn.Module):
     def __init__(self, model_name, pretrained, with_proj_layer):
         super().__init__()
         model, train_transform, _ = open_clip.create_model_and_transforms(model_name, pretrained)
@@ -137,18 +136,18 @@ def get_foundational_model(config):
         model = OpenClipViT(config.MODEL.BACKBONE.model_name, config.MODEL.BACKBONE.weights,
                             config.MODEL.BACKBONE.proj_layer)
 
-    elif config.MODEL.BACKBONE.type == "eva02_timm":
+    elif config.MODEL.BACKBONE.type == "eva02":
         model = EVA02ViT(config.MODEL.BACKBONE.model_name, config.MODEL.BACKBONE.proj_layer)
 
-    elif config.MODEL.BACKBONE.type == "dinov2_timm":
+    elif config.MODEL.BACKBONE.type == "dinov2":
         model = DINOv2ViT(config.MODEL.BACKBONE.model_name, config.TRANSFORM.size)
 
-    elif config.MODEL.BACKBONE.type == "sam_timm":
+    elif config.MODEL.BACKBONE.type == "sam":
         model = SAMViT(config.MODEL.BACKBONE.model_name, config.TRANSFORM.size)
 
     elif config.MODEL.BACKBONE.type == "clip_convnext":
-        model = ConvNext(config.MODEL.BACKBONE.model_name, config.MODEL.BACKBONE.weights,
-                         config.MODEL.BACKBONE.proj_layer)
+        model = OpenClipConvNext(config.MODEL.BACKBONE.model_name, config.MODEL.BACKBONE.weights,
+                                 config.MODEL.BACKBONE.proj_layer)
 
     elif config.MODEL.BACKBONE.type == "siglip_timm":
         model = SigLIPViT(config.MODEL.BACKBONE.model_name)
