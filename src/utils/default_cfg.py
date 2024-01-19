@@ -80,6 +80,7 @@ _C.TRAIN.save_iter = 2500  # Save the model every saver_iter iterations. Only ac
 _C.TRAIN.seen_img_save = 320000  # Save the model every seen_img_save seen images.
 _C.TRAIN.print_freq = 500  # Print frequency of the train_pipeline logs.
 _C.TRAIN.device = "cuda:0"  # Device to use for training.
+_C.TRAIN.gpu_ids = [0, 1]  # GPU IDs to use for training.
 _C.TRAIN.data_parallel = False  # Whether to use data parallelism.
 
 # loss

@@ -141,7 +141,7 @@ def get_file_id(config, file_name, logger):
 
 
 if __name__ == '__main__':
-    from src.utils.config import get_cfg_defaults
+    from src.utils.default_cfg import get_cfg_defaults
 
     cfg = get_cfg_defaults()
     cfg.GOOGLE_DRIVE.client_secret_path = "../../credentials/client_secret.json"
