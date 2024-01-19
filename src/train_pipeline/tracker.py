@@ -31,7 +31,7 @@ class TrainTracker:
         plt.savefig(save_path)
         plt.close()
 
-    def plot_losses(self, save_path):
+    def plot_loss(self, save_path):
         plt.plot(self.training_loss)
         if self.cfg.TRAIN.epoch_based:
             plt.xlabel("Epochs")
