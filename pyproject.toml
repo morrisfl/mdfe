@@ -15,17 +15,15 @@ classifiers = [
     "Operating System :: OS Independent",
 ]
 dependencies = [
-    "timm",
-    "matplotlib",
-    "numpy",
-    "tqdm",
-    "yacs",
-    "open_clip_torch",
-    "pandas",
-    "pytorch-warmup",
     "google-api-python-client",
     "google-auth-httplib2",
     "google-auth-oauthlib",
-    "openpyxl",
-    "torchinfo"
+    "matplotlib",
+    "numpy",
+    "open_clip_torch",
+    "pandas",
+    "pytorch-warmup",
+    "timm",
+    "tqdm",
+    "yacs",
 ]
