@@ -1,6 +1,7 @@
 # MDFE - Multi-Domain Feature Extraction
 
 ![model overview](readme/model_overview.svg)
+
 **Figure:** *Overview of the proposed multi-domain image embedding model. The model consists of a visual-semantic foundation
 model as backbone with an attached projection layer. The model was trained on a custom curated multi-domain training dataset (M4D-35k), 
 using a margin-based softmax loss.*
