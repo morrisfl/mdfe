@@ -1,8 +1,32 @@
 # MDFE - Multi-Domain Feature Extraction
 
 ![model overview](readme/model_overview.png)
+**Figure:** *Overview of the proposed multi-domain image embedding model. The model consists of a visual-semantic foundation
+model as backbone with an attached projection layer. The model was trained on a custom curated multi-domain training dataset (M4D-35k), 
+using a margin-based softmax loss.*
 
-Intro text (e.g. abstract)
+This repository is related to the research conducted for my master thesis entitled "**Efficient and Discriminative Image 
+Feature Extraction for Multi-Domain Image Retrieval**". An executive summery of the thesis can be found [here](readme/executive_summary.pdf). 
+For those interested in a comprehensive review of the entire work, please feel free to contact me to obtain a copy of the 
+full thesis report.
+
+### Abstract
+The prevalence of image capture devices has led to the growth of digital image collections, requiring advanced retrieval systems. 
+Current methods are often limited by their domain specificity, struggle with out-of-domain images, and lack of generalization. 
+This study addresses these limitations by focusing on multi-domain feature extraction. The goal entails in developing an 
+efficient multi-domain image encoder for fine-grained retrieval while overcoming computational constraints. Therefore, a 
+multi-domain training dataset, called *M4D-35k*, was curated, allowing for resource-efficient training. Dataset 
+curation involved selecting from 15 datasets and optimizing their overall size in terms of samples and classes used. 
+Additionally, the effectiveness of various visual-semantic foundation models and margin-based softmax loss were evaluated 
+to assess their suitability for multi-domain feature extraction. Among the loss functions investigated, a proprietary approach 
+was developed that refers to *CLAM* (**cl**ass distribution aware additive **a**ngular **m**argin loss). Even with computational 
+limitations, a close to SOTA result was achieved on the [Google Universal Image Embedding Challenge](https://www.kaggle.com/competitions/google-universal-image-embedding) 
+(GUIEC) evaluation dataset. Linear probing of the embedding model alone resulted in a mMP@5 score of 0.722. The total 
+number of model parameters and the number of trainable parameters were reduced by 32% and 289 times, respectively. Despite 
+the smaller model and without end-to-end fine-tuning, it trailed the GUIEC leaderboard by only 0.8%, surpassing 2nd place 
+and closely behind 1st. It also outperformed the top-ranked method with similar computational prerequisites by 3.6%.
+
+### Results
 
 ## Table of Contents
 
@@ -132,8 +156,20 @@ maximizing the performance on the GUIEC evaluation dataset. *M4D-35k* consists o
 
 To use *M4D-35k* for training, add `m4d_35k` to the `DATASET.names` parameter in the configuration file in `configs/`.
 
-
 ## III. Embedding Model
+
+| Foundation Model | Encoder architecture |     `type`      |   `model_name`   |    `weights`     |
+|------------------|----------------------|:---------------:|:----------------:|:----------------:|
+| [CLIP]()         | ViT                  |     `clip`      | see [OpenCLIP]() | see [OpenCLIP]() |
+ | [CLIP]()         | ConvNeXt             | `clip_convnext` | see [OpenCLIP]() | see [OpenCLIP]() |
+ | [CLIPA]()        | ViT                  |    `clipav2`    | see [OpenCLIP]() | see [OpenCLIP]() | 
+ | [EVA-CLIP]()     | ViT                  |     `eva02`     |   see [timm]()   |        -         | 
+ | [MetaCLIP]()     | ViT                  |   `meta-clip`   | see [OpenCLIP]() | see [OpenCLIP]() | 
+ | [SigLIP]()       | ViT                  |    `siglip`     |   see [timm]()   |        -         |
+ | [DINOv2]()       | ViT                  |    `dinov2`     |   see [timm]()   |        -         |
+ | [SAM]()          | ViT                  |      `sam`      |   see [timm]()   |        -         |
+
+
 
 
 ## IV. Training
