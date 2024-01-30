@@ -1,6 +1,6 @@
 # MDFE - Multi-Domain Feature Extraction
 
-![model overview](readme/model_overview.png)
+![model overview](readme/model_overview.svg)
 **Figure:** *Overview of the proposed multi-domain image embedding model. The model consists of a visual-semantic foundation
 model as backbone with an attached projection layer. The model was trained on a custom curated multi-domain training dataset (M4D-35k), 
 using a margin-based softmax loss.*
@@ -27,9 +27,25 @@ the smaller model and without end-to-end fine-tuning, it trailed the GUIEC leade
 and closely behind 1st. It also outperformed the top-ranked method with similar computational prerequisites by 3.6%.
 
 ### Results
+|                                              GUIEC rank                                              | Method         | # total model params | # trainable params | mMP@5 |
+|:----------------------------------------------------------------------------------------------------:|----------------|:--------------------:|:------------------:|:-----:|
+| [1st place](https://www.kaggle.com/competitions/google-universal-image-embedding/discussion/359316)  | fine-tuning    |         661M         |        661M        | 0.730 |
+| [2nd place](https://www.kaggle.com/competitions/google-universal-image-embedding/discussion/359525)  | fine-tuning    |         667M         |        667M        | 0.711 |
+| [5th place](https://www.kaggle.com/competitions/google-universal-image-embedding/discussion/359161)  | linear probing |         633M         |        1.1M        | 0.686 |
+| [10th place](https://www.kaggle.com/competitions/google-universal-image-embedding/discussion/359271) | linear probing |        1,045M        |       22.0M        | 0.675 |
+|                                             Own approach                                             | linear probing |         431M         |        2.3M        | 0.722 |
+
+**Table:** *Comparison of the proposed approach with the top-ranked methods on the GUIEC evaluation dataset. It improves 
+the total model parameters at inference by 32% compared to the leanest approach (5th place), reduces the number of trainable 
+parameters by 289x compared to the fine-tuning approaches (1st and 2nd place), and achieves a performance close to SOTA, 
+surpassing 2nd place and just behind 1st place.*
 
 ## Table of Contents
-
+- [I. Setup](#i-setup)
+- [II. Data Preparation](#ii-data-preparation)
+- [III. Embedding Model](#iii-embedding-model)
+- [IV. Training](#iv-training)
+- [V. Evaluation](#v-evaluation)
 
 ## I. Setup
 Here, we describe a step-by-step guide to setup and install dependencies on a UNIX-based system, such as Ubuntu, using 
