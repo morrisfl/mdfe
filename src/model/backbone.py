@@ -3,14 +3,6 @@ import torch
 from torch import nn
 import timm
 
-OUTPUT_DIM = {
-    "ViT-B-16": 768,
-    "ViT-L-14": 1024,
-    "ViT-L-14-336": 1024,
-    "ViT-H-14": 1280,
-    "ViT-g-14": 1408
-}
-
 
 class OpenClipViT(nn.Module):
     def __init__(self, model_name, pretrained, with_proj_layer):
@@ -149,7 +141,7 @@ def get_foundational_model(config):
         model = OpenClipConvNext(config.MODEL.BACKBONE.model_name, config.MODEL.BACKBONE.weights,
                                  config.MODEL.BACKBONE.proj_layer)
 
-    elif config.MODEL.BACKBONE.type == "siglip_timm":
+    elif config.MODEL.BACKBONE.type == "siglip":
         model = SigLIPViT(config.MODEL.BACKBONE.model_name)
 
     else:
