@@ -11,6 +11,7 @@ from datasets.fashion200k import Fashion200k
 from datasets.food101 import Food101
 from datasets.furniture180 import Furniture180
 from datasets.hm_personalised_fashion import HuMPersonalisedFashion
+from datasets.m4d35k import M4D35k
 from datasets.rp2k import RP2K
 from datasets.shopee import Shopee
 from datasets.stanford_cars import StanfordCars
@@ -32,21 +33,7 @@ def build_dataset(config):
         dataset = None
 
         if dataset_name == "m4d-35k":
-            cls = classes
-            dataset = []
-            p10k = Products10k(data_root, min_samples=3, max_samples=None, transform=train_transform, offset=cls)
-            dataset.append(p10k)
-            cls += p10k.num_classes
-            gl21 = GLDv2(data_root, subset=True, transform=train_transform, offset=cls)
-            dataset.append(gl21)
-            cls += gl21.num_classes
-            df = DeepFashion(data_root, min_samples=3, max_samples=None, num_cls=None, transform=train_transform,
-                             offset=cls)
-            dataset.append(df)
-            cls += df.num_classes
-            sc = StanfordCars(data_root, refined_cls=True, transform=train_transform, offset=cls)
-            dataset.append(sc)
-            cls += sc.num_classes
+            dataset = M4D35k(data_root, transform=train_transform, offset=classes)
 
         elif dataset_name == "products_10k":
             dataset = Products10k(data_root, transform=train_transform, offset=classes)
@@ -94,12 +81,8 @@ def build_dataset(config):
             dataset = Storefronts146(data_root, transform=train_transform, offset=classes)
 
         if dataset is not None:
-            if isinstance(dataset, list):
-                datasets.extend(dataset)
-                classes = cls
-            else:
-                datasets.append(dataset)
-                classes += dataset.num_classes
+            datasets.append(dataset)
+            classes += dataset.num_classes
         else:
             print(f"Dataset {dataset_name} not found")
 

@@ -9,11 +9,10 @@ from tqdm import tqdm
 
 
 class GLDv2(Dataset):
-    def __init__(self, root, subset=False, min_samples=3, max_samples=100, num_cls=None, transform=None,
-                 augmentation=None, data_amount=None, offset=0):
+    def __init__(self, root, min_samples=3, max_samples=100, num_cls=None, transform=None, augmentation=None,
+                 data_amount=None, offset=0):
         """Parameters:
             root (str): Path to the root directory of the datasets.
-            subset (bool, optional): Whether to use the 10k subset of the dataset.
             min_samples (int, optional): Minimum number of samples per class to use.
             max_samples (int, optional): Maximum number of samples per class to use.
             num_cls (int, optional): Number of classes to use.
@@ -29,13 +28,8 @@ class GLDv2(Dataset):
 
         self.img_dir = os.path.join(self.root, "train")
 
-        if subset:
-            self.df = pd.read_csv(os.path.join(self.root, "gldv2_train_cls10000.csv"), converters={"": str})
-            self.landmark_ids = sorted(list(self.df["landmark_id"].unique()))
-            self.num_classes = len(self.landmark_ids)
-        else:
-            self.df = pd.read_csv(os.path.join(self.root, "train.csv"), nrows=data_amount, converters={"": str})
-            self.num_classes, self.landmark_ids = self._sampling()
+        self.df = pd.read_csv(os.path.join(self.root, "train.csv"), nrows=data_amount, converters={"": str})
+        self.num_classes, self.landmark_ids = self._sampling()
 
         ids_to_label = {class_id: idx + offset for idx, class_id in enumerate(self.landmark_ids)}
         self.df["landmark_id"] = self.df["landmark_id"].map(ids_to_label)
