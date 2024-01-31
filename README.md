@@ -84,34 +84,34 @@ Setup instructions can be found [here](src/utils/google_drive.md).
 ## II. Data Preparation
 In the process of fine-tuning/linear probing the embedding models, the following dataset can be used:
 
-| Dataset                                                                                                           |        Domain         |    Config key    | Note                                                                             |
-|-------------------------------------------------------------------------------------------------------------------|:---------------------:|:----------------:|----------------------------------------------------------------------------------|
-| [Products-10k](https://products-10k.github.io)                                                                    |    Packaged goods     |  `products_10k`  |                                                                                  |
- | [Google Landmarks v2](https://www.kaggle.com/c/landmark-recognition-2021/data)                                    |       Landmarks       |     `gldv2`      | cleaned subset of GLDv2 is used.                                                 |
-| [DeepFashion (Consumer to Shop)](https://www.kaggle.com/datasets/sangamman/deepfashion-consumer-to-shop-training) | Apparel & Accessories |  `deep_fashion`  |                                                                                  |
-| [MET Artwork](http://cmp.felk.cvut.cz/met/)                                                                       |        Artwork        |    `met_art`     |                                                                                  |
- | [Shopee](https://www.kaggle.com/competitions/shopee-product-matching/data)                                        |    Packaged goods     |     `shopee`     |                                                                                  |
- | [H&M Personalized Fashion](https://www.kaggle.com/competitions/h-and-m-personalized-fashion-recommendations/data) | Apparel & Accessories |       `hm`       |                                                                                  |
- | [RP2K](https://www.pinlandata.com/rp2k_dataset/)                                                                  |    Packaged goods     |      `rp2k`      |                                                                                  |
- | [Stanford Online Products](https://cvgl.stanford.edu/projects/lifted_struct/)                                     |    Packaged goods     |      `sop`       |                                                                                  |
- | [Fashion200k](https://github.com/xthan/fashion-200k)                                                              | Apparel & Accessories |  `fashion200k`   | annotations in csv format (see `data/fashion200k_train.csv`)                     |
- | [Food Recognition 2022](https://www.aicrowd.com/challenges/food-recognition-benchmark-2022#datasets)              |     Food & Dishes     |   `food_rec22`   | dataset must to bee preprocessed according to `data/food_rec22_preprocess.py`    |
- | [Stanford Cars](https://www.kaggle.com/datasets/jessicali9530/stanford-cars-dataset)                              |         Cars          | `stanford_cars`  | annotations in csv format (see `data/sc_train.csv`)                              |
- | [DeepFashion2](https://github.com/switchablenorms/DeepFashion2)                                                   | Apparel & Accessories | `deep_fashion2`  | dataset must to bee preprocessed according to `data/deep_fashion2_preprocess.py` |
- | [Food101](https://data.vision.ee.ethz.ch/cvl/datasets_extra/food-101/)                                            |     Food & Dishes     |    `food101`     | test images are used for training.                                               |
- | [Furniture 180](https://www.kaggle.com/datasets/andreybeyn/qudata-gembed-furniture-180)                           |       Furniture       |  `furniture180`  | annotations in csv format (see `data/furniture180_train.csv`)                    |
- | [Storefornts 146](https://www.kaggle.com/datasets/kerrit/storefront-146)                                          |      Storefronts      | `storefronts146` | annotations in csv format (see `data/storefronts146_train.csv`)                  |
+| Dataset                                                                                                           |        Domain         |    Config key    | Note                                                                                                    |
+|-------------------------------------------------------------------------------------------------------------------|:---------------------:|:----------------:|---------------------------------------------------------------------------------------------------------|
+| [Products-10k](https://products-10k.github.io)                                                                    |    Packaged goods     |  `products_10k`  |                                                                                                         |
+ | [Google Landmarks v2](https://www.kaggle.com/c/landmark-recognition-2021/data)                                    |       Landmarks       |     `gldv2`      | cleaned subset of GLDv2 is used.                                                                        |
+| [DeepFashion (Consumer to Shop)](https://www.kaggle.com/datasets/sangamman/deepfashion-consumer-to-shop-training) | Apparel & Accessories |  `deep_fashion`  |                                                                                                         |
+| [MET Artwork](http://cmp.felk.cvut.cz/met/)                                                                       |        Artwork        |    `met_art`     |                                                                                                         |
+ | [Shopee](https://www.kaggle.com/competitions/shopee-product-matching/data)                                        |    Packaged goods     |     `shopee`     |                                                                                                         |
+ | [H&M Personalized Fashion](https://www.kaggle.com/competitions/h-and-m-personalized-fashion-recommendations/data) | Apparel & Accessories |       `hm`       |                                                                                                         |
+ | [RP2K](https://www.pinlandata.com/rp2k_dataset/)                                                                  |    Packaged goods     |      `rp2k`      |                                                                                                         |
+ | [Stanford Online Products](https://cvgl.stanford.edu/projects/lifted_struct/)                                     |    Packaged goods     |      `sop`       |                                                                                                         |
+ | [Fashion200k](https://github.com/xthan/fashion-200k)                                                              | Apparel & Accessories |  `fashion200k`   | annotations in csv format (see `data/fashion200k_train.csv`)                                            |
+ | [Food Recognition 2022](https://www.aicrowd.com/challenges/food-recognition-benchmark-2022#datasets)              |     Food & Dishes     |   `food_rec22`   | dataset must to bee preprocessed according to `data/food_rec22_preprocess.py`                           |
+ | [Stanford Cars](https://www.kaggle.com/datasets/jessicali9530/stanford-cars-dataset)                              |         Cars          | `stanford_cars`  | annotations in csv format [here](https://github.com/BotechEngineering/StanfordCarsDatasetCSV/tree/main) |
+ | [DeepFashion2](https://github.com/switchablenorms/DeepFashion2)                                                   | Apparel & Accessories | `deep_fashion2`  | dataset must to bee preprocessed according to `data/deep_fashion2_preprocess.py`                        |
+ | [Food101](https://data.vision.ee.ethz.ch/cvl/datasets_extra/food-101/)                                            |     Food & Dishes     |    `food101`     | test images are used for training.                                                                      |
+ | [Furniture 180](https://www.kaggle.com/datasets/andreybeyn/qudata-gembed-furniture-180)                           |       Furniture       |  `furniture180`  | annotations in csv format (see `data/furniture180_train.csv`)                                           |
+ | [Storefornts 146](https://www.kaggle.com/datasets/kerrit/storefront-146)                                          |      Storefronts      | `storefronts146` | annotations in csv format (see `data/storefronts146_train.csv`)                                         |
 
 Download the datasets and place them in a `<data_dir>` of your choice. The directory structure should look as follows:
 ```
 <data_dir>/
+├── m4d-35k_train.csv
 ├── products-10k/
 │   ├── train
 │   └── train.csv
 ├── google_landmark_recognition_2021/
 │   ├── train
-│   ├── train.csv
-│   └── gldv2_train_cls10000.csv
+│   └── train.csv
 ├── deepfashion/
 │   ├── train
 │   └── deepfashion_train.json
@@ -140,8 +140,7 @@ Download the datasets and place them in a `<data_dir>` of your choice. The direc
 │   └── train.csv
 ├── stanford_cars/
 │   ├── cars_train
-│   ├── sc_train.csv
-│   └── sc_refined_train.csv
+│   └── sc_train.csv
 ├── deep_fashion2/
 │   ├── image
 │   ├── annos
@@ -161,15 +160,25 @@ Download the datasets and place them in a `<data_dir>` of your choice. The direc
 The above-mentioned datasets can be included into the training process by adding the corresponding `config key` to the
 `DATASET.names` parameter in the configuration file in `configs/`.
 
-#### *M4D-35k*
+### *M4D-35k*
 The *M4D-35k* dataset is a custom curated multi-domain training dataset. It was created for resource-efficient training of 
-multi-domain image embeddings. The curation process involved dataset selection data sampling (optimize data size) by 
-maximizing the performance on the GUIEC evaluation dataset. *M4D-35k* consists of the following datasets:
+multi-domain image embeddings. The curation process involved dataset selection and data sampling (optimize data size) by 
+maximizing the performance on the GUIEC evaluation dataset. *M4D-35k* consists of 35k classes and 328k images sourced 
+from four different datasets:
 
-- Products-10k
-- 10k classes from Google Landmarks v2. The corresponding landmark annotations are available in `data/gldv2_train_cls10000.csv`.
-- DeepFashion (Consumer to Shop)
-- A refined version of Stanford Cars. The corresponding annotations are available in `data/sc_refined_train.csv`.
+| Domain                | Dataset                                                                                                           | # classes | # images |
+|-----------------------|-------------------------------------------------------------------------------------------------------------------|:---------:|:--------:|
+| Packaged goods        | [Products-10k](https://products-10k.github.io)                                                                    |   9.5k    |  141.5k  |
+| Landmarks             | [Google Landmarks v2](https://www.kaggle.com/c/landmark-recognition-2021/data) (subset)                           |   10.0k   |  79.2k   |
+| Apparel & Accessories | [DeepFashion (Consumer to Shop)](https://www.kaggle.com/datasets/sangamman/deepfashion-consumer-to-shop-training) |   14.3k   |  100.4k  |
+| Cars                  | [Stanford Cars](https://www.kaggle.com/datasets/jessicali9530/stanford-cars-dataset) (refined)                    |   1.0k    |   7.3k   |
+| Multi-Domain          | *M4D-35k*                                                                                                         |   34.8k   |  328.4k  |
+
+Notable, the Stanford Cars dataset was refined by enhancing the class granularity. Instead of classifying cars only by their
+model, the class labels were extended to the car color. More information about the refinement process can be found [here](https://github.com/morrisfl/stanford_cars_refined).
+
+The corresponding annotations of the *M4D-35k* dataset can be found in `data/m4d-35k_train.csv`. Make sure to download the 
+corresponding datasets included in the *M4D-35k* dataset. The directory structure should look as above.
 
 To use *M4D-35k* for training, add `m4d_35k` to the `DATASET.names` parameter in the configuration file in `configs/`.
 
