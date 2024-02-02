@@ -2,7 +2,7 @@
 
 ![model overview](readme/model_overview.svg)
 
-**Figure:** *Overview of the proposed multi-domain image embedding model. The model consists of a visual-semantic foundation
+**Figure 1:** *Overview of the proposed multi-domain image embedding model. The model consists of a visual-semantic foundation
 model as backbone with an attached projection layer. The model was trained on a custom curated multi-domain training dataset (M4D-35k), 
 using a margin-based softmax loss.*
 
@@ -79,86 +79,12 @@ python -m pip install -e .
 ```
 #### 5. Setup Google Drive access (optional)
 In order to automatically upload checkpoints to Google Drive, you need to create a Google Drive API key. 
-Setup instructions can be found [here](src/utils/google_drive.md).
+Setup instructions can be found [here](src/utils/GOOGLE_DRIVE.md).
 
 ## II. Data Preparation
-In the process of fine-tuning/linear probing the embedding models, the following dataset can be used:
-
-| Dataset                                                                                                           |        Domain         |    Config key    | Note                                                                                                    |
-|-------------------------------------------------------------------------------------------------------------------|:---------------------:|:----------------:|---------------------------------------------------------------------------------------------------------|
-| [Products-10k](https://products-10k.github.io)                                                                    |    Packaged goods     |  `products_10k`  |                                                                                                         |
- | [Google Landmarks v2](https://www.kaggle.com/c/landmark-recognition-2021/data)                                    |       Landmarks       |     `gldv2`      | cleaned subset of GLDv2 is used.                                                                        |
-| [DeepFashion (Consumer to Shop)](https://www.kaggle.com/datasets/sangamman/deepfashion-consumer-to-shop-training) | Apparel & Accessories |  `deep_fashion`  |                                                                                                         |
-| [MET Artwork](http://cmp.felk.cvut.cz/met/)                                                                       |        Artwork        |    `met_art`     |                                                                                                         |
- | [Shopee](https://www.kaggle.com/competitions/shopee-product-matching/data)                                        |    Packaged goods     |     `shopee`     |                                                                                                         |
- | [H&M Personalized Fashion](https://www.kaggle.com/competitions/h-and-m-personalized-fashion-recommendations/data) | Apparel & Accessories |       `hm`       |                                                                                                         |
- | [RP2K](https://www.pinlandata.com/rp2k_dataset/)                                                                  |    Packaged goods     |      `rp2k`      |                                                                                                         |
- | [Stanford Online Products](https://cvgl.stanford.edu/projects/lifted_struct/)                                     |    Packaged goods     |      `sop`       |                                                                                                         |
- | [Fashion200k](https://github.com/xthan/fashion-200k)                                                              | Apparel & Accessories |  `fashion200k`   | annotations in csv format (see `data/fashion200k_train.csv`)                                            |
- | [Food Recognition 2022](https://www.aicrowd.com/challenges/food-recognition-benchmark-2022#datasets)              |     Food & Dishes     |   `food_rec22`   | dataset must to bee preprocessed according to `data/food_rec22_preprocess.py`                           |
- | [Stanford Cars](https://www.kaggle.com/datasets/jessicali9530/stanford-cars-dataset)                              |         Cars          | `stanford_cars`  | annotations in csv format [here](https://github.com/BotechEngineering/StanfordCarsDatasetCSV/tree/main) |
- | [DeepFashion2](https://github.com/switchablenorms/DeepFashion2)                                                   | Apparel & Accessories | `deep_fashion2`  | dataset must to bee preprocessed according to `data/deep_fashion2_preprocess.py`                        |
- | [Food101](https://data.vision.ee.ethz.ch/cvl/datasets_extra/food-101/)                                            |     Food & Dishes     |    `food101`     | test images are used for training.                                                                      |
- | [Furniture 180](https://www.kaggle.com/datasets/andreybeyn/qudata-gembed-furniture-180)                           |       Furniture       |  `furniture180`  | annotations in csv format (see `data/furniture180_train.csv`)                                           |
- | [Storefornts 146](https://www.kaggle.com/datasets/kerrit/storefront-146)                                          |      Storefronts      | `storefronts146` | annotations in csv format (see `data/storefronts146_train.csv`)                                         |
-
-Download the datasets and place them in a `<data_dir>` of your choice. The directory structure should look as follows:
-```
-<data_dir>/
-├── m4d-35k_train.csv
-├── products-10k/
-│   ├── train
-│   └── train.csv
-├── google_landmark_recognition_2021/
-│   ├── train
-│   └── train.csv
-├── deepfashion/
-│   ├── train
-│   └── deepfashion_train.json
-├── met_dataset/
-│   ├── MET
-│   └── ground_truth/MET_database.json
-├── shopee/
-│   ├── train_imahes
-│   └── train.csv
-├── hm_personalized_fashion/
-│   ├── images
-│   └── articles.csv
-├── rp2k/
-│   ├── train
-│   └── train.csv
-├── stanford_online_products/
-│   ├── <img_dirs>
-│   └── Ebay_train.txt
-├── fashion200k/
-│   ├── women
-│   └── fashion200k_train.csv
-├── fr22_train_v2/
-│   ├── images
-│   ├── preprocessed_imgs
-│   ├── annotations.json
-│   └── train.csv
-├── stanford_cars/
-│   ├── cars_train
-│   └── sc_train.csv
-├── deep_fashion2/
-│   ├── image
-│   ├── annos
-│   ├── preprocessed_imgs
-│   └── train.csv
-├── food-101/
-│   ├──images
-│   └── meta/test.json
-├── furniture_180/
-│   ├── <img_dirs>
-│   └── furniture180_train.csv
-└── storefronts_146/
-    ├── <img_dirs>
-    └── storefronts146_train.csv
-```
-
-The above-mentioned datasets can be included into the training process by adding the corresponding `config key` to the
-`DATASET.names` parameter in the configuration file in `configs/`.
+In the process of fine-tuning/linear probing the embedding models, different datasets and dataset combinations can be used.
+The list of available datasets, and information about pre-processing, downloading and how to use them for training can be 
+found [here](src/datasets/DATASET.md).
 
 ### *M4D-35k*
 The *M4D-35k* dataset is a custom curated multi-domain training dataset. It was created for resource-efficient training of 
@@ -178,27 +104,88 @@ Notable, the Stanford Cars dataset was refined by enhancing the class granularit
 model, the class labels were extended to the car color. More information about the refinement process can be found [here](https://github.com/morrisfl/stanford_cars_refined).
 
 The corresponding annotations of the *M4D-35k* dataset can be found in `data/m4d-35k_train.csv`. Make sure to download the 
-corresponding datasets included in the *M4D-35k* dataset. The directory structure should look as above.
+corresponding datasets included in the *M4D-35k* dataset and place them in a `<data_dir>` of your choice. More information
+about the dataset and directory structure can be found [here](src/datasets/DATASET.md).
 
 To use *M4D-35k* for training, add `m4d_35k` to the `DATASET.names` parameter in the configuration file in `configs/`.
 
 ## III. Embedding Model
+The architecture of the image embedding model is illustrated in Figure 1. The model consists of a visual-semantic foundation
+model as backbone with an attached projection layer. Different foundation models can be used, as shown in the table below.
 
-| Foundation Model | Encoder architecture |     `type`      |   `model_name`   |    `weights`     |
-|------------------|----------------------|:---------------:|:----------------:|:----------------:|
-| [CLIP]()         | ViT                  |     `clip`      | see [OpenCLIP]() | see [OpenCLIP]() |
- | [CLIP]()         | ConvNeXt             | `clip_convnext` | see [OpenCLIP]() | see [OpenCLIP]() |
- | [CLIPA]()        | ViT                  |    `clipav2`    | see [OpenCLIP]() | see [OpenCLIP]() | 
- | [EVA-CLIP]()     | ViT                  |     `eva02`     |   see [timm]()   |        -         | 
- | [MetaCLIP]()     | ViT                  |   `meta-clip`   | see [OpenCLIP]() | see [OpenCLIP]() | 
- | [SigLIP]()       | ViT                  |    `siglip`     |   see [timm]()   |        -         |
- | [DINOv2]()       | ViT                  |    `dinov2`     |   see [timm]()   |        -         |
- | [SAM]()          | ViT                  |      `sam`      |   see [timm]()   |        -         |
+|                          Foundation Model                          | Encoder architecture |     `type`      |                         `model_name`                         |                         `weights`                          |
+|:------------------------------------------------------------------:|:--------------------:|:---------------:|:------------------------------------------------------------:|:----------------------------------------------------------:|
+|       [OpenCLIP](https://github.com/mlfoundations/open_clip)       |         ViT          |     `clip`      |  see [OpenCLIP](https://github.com/mlfoundations/open_clip)  | see [OpenCLIP](https://github.com/mlfoundations/open_clip) |
+ |       [OpenCLIP](https://github.com/mlfoundations/open_clip)       |       ConvNeXt       | `clip_convnext` |  see [OpenCLIP](https://github.com/mlfoundations/open_clip)  | see [OpenCLIP](https://github.com/mlfoundations/open_clip) |
+ |            [CLIPA](https://github.com/UCSC-VLAA/CLIPA)             |         ViT          |    `clipav2`    |  see [OpenCLIP](https://github.com/mlfoundations/open_clip)  | see [OpenCLIP](https://github.com/mlfoundations/open_clip) | 
+ | [EVA-CLIP](https://github.com/baaivision/EVA/tree/master/EVA-CLIP) |         ViT          |     `eva02`     | see [timm](https://huggingface.co/timm?search_models=eva02)  |                             -                              | 
+ |      [MetaCLIP](https://github.com/facebookresearch/MetaCLIP)      |         ViT          |   `meta-clip`   |  see [OpenCLIP](https://github.com/mlfoundations/open_clip)  | see [OpenCLIP](https://github.com/mlfoundations/open_clip) | 
+ |             [SigLIP](https://arxiv.org/abs/2303.15343)             |         ViT          |    `siglip`     | see [timm](https://huggingface.co/timm?search_models=siglip) |                             -                              |
+ |        [DINOv2](https://github.com/facebookresearch/dinov2)        |         ViT          |    `dinov2`     | see [timm](https://huggingface.co/timm?search_models=dinov2) |                             -                              |
+ |    [SAM](https://github.com/facebookresearch/segment-anything)     |         ViT          |      `sam`      | see [timm](https://huggingface.co/timm?search_models=samvit) |                             -                              |
 
+In order to adjust the model architecture of the image embedding model, the following main parameters can be changed in the
+configuration file:
+- `MODEL.embedding_dim`: the dimension of the image embedding.
+- `MODEL.BACKBONE.type`: the type of the visual-semantic foundation model, supported types are those listed in the table above.
+- `MODEL.BACKBONE.model_name`: the name of the visual-semantic foundation model, specified by OpenCLIP or timm.
+- `MODEL.BACKBONE.weights`: the weights of the visual-semantic foundation model, only required for OpenCLIP models (corresponds to the pretrained parameter in [OpenCLIP](https://github.com/mlfoundations/open_clip)).
+- `MODEL.NECK.type`: the type to reduce the embedding dimension to the specified `MODEL.embedding_dim`, supported types are `proj_layer` and `pooling`.
+- `MODEL.HEAD.name`: the name of the margin-based softmax loss, supported names are `ArcFace`, `DynM-ArcFace`, `AdaCos`, `LiArcFace`, `CurricularFace`, and `AdaFace`.
+- `MODEL.HEAD.k`: the number of centers for the margin-based softmax loss.
+- `MODEL.HEAD.s`: the scaling factor for the margin-based softmax loss.
+- `MODEL.HEAD.m`: the margin for the margin-based softmax loss.
 
+Further explanations of changeable parameters can be found in the [default_cfg.py](src/utils/default_cfg.py).
 
 
 ## IV. Training
+### Training settings
+The training settings can be changed in the configuration file found in `configs/`. The most important parameters are:
+- `TRAIN.epoch_based`: if `True`, the training is based on the number of epochs, otherwise on the number of iterations.
+- `TRAIN.epochs`: the number of epochs to train the model.
+- `TRAIN.save_epoch`: the frequency of saving the model checkpoint.
+- `OPTIMIZER.name`: the optimizer used for training, supported optimizers are `Adam`, `AdamW` and `SGD`.
+- `OPTIMIZER.lr`: the learning rate of the optimizer.
+- `OPTIMIZER.weight_decay`: the weight decay of the optimizer.
+- `SCHEDULER.name`: the learning rate scheduler used for training, supported schedulers are `CosineAnnealingLR`.
+- `SCHEDULER.epoch_based`: if `True`, the scheduler is based on the number of epochs, otherwise on the number of iterations.
+- `SCEDULER.min_lr`: the minimum learning rate of the scheduler.
+- `SCHEDULER.warmup`: the type of warmup to use, supported warmups are `linear` and `exponential`.
+- `SCHEDULER.warmup_steps`: the number of warmup steps. If the value is 1, the steps are equivalent to the number of iterations of one epoch.
 
+Further explanations of changeable parameters can be found in the [default_cfg.py](src/utils/default_cfg.py).
+
+### Training run
+To start the training, run the following command:
+```
+python tools/train.py configs/<config_file> <data_dir> \
+    --output-dir results/ \
+    --data_parallelism \
+    --device cuda:0
+```
+The `<config_file>` corresponds to the configuration file in `configs/` and `<data_dir>` to the directory where the datasets
+are stored. The `--output-dir` parameter specifies the directory where the training results are stored. The `--data_parallelism`
+parameter enables the use of multiple GPUs for training (available GPU IDs must be specified in the configuration file under
+`TRAIN.gpu_ids`). The `--device` parameter specifies the device to use for training.
+
+### Zero-shot model
+To create a zero-shot model, which can be used for zero-shot evaluate, run the following command:
+```
+python tools/zero_shot_model.py configs/<config_file>
+```
+Within the `<config_file>`, the model architecture should be specified. The zero-shot model will be saved in the `results/`. 
+If the `MODEL.cloud_upload` parameter in the configuration file is set to `True`, the zero-shot model will be uploaded 
+to Google Drive.
 
 ## V. Evaluation
+This repository does not provide any evaluation scripts. However, the evaluation of the trained embedding models can be
+performed on the [Google Universal Image Embedding Challenge](https://www.kaggle.com/competitions/google-universal-image-embedding)
+hosted on Kaggle. The evaluation dataset consists of 5k query images and 200k index images across 11 different domains.
+The evaluation metric is the modified mean precision at 5 (mMP@5). 
+
+For evaluation, the trained embedding model has to be uploaded to Kaggle, where a scoring notebook performs feature extraction
+and metric computation on the evaluation dataset. In `notebooks/` a template notebook is provided, which can be used to
+submit the trained embedding model to the challenge. Please note, this notebook downloads the embedding model from Google
+Drive. Therefore, the `model_name` and download `url` (shared link) have to be specified.
+
