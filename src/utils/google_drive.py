@@ -146,7 +146,6 @@ if __name__ == '__main__':
     cfg = get_cfg_defaults()
     cfg.GOOGLE_DRIVE.client_secret_path = "../../credentials/client_secret.json"
     cfg.GOOGLE_DRIVE.token_path = "../../credentials/token_drive_v3.pickle"
-    cfg.SLACK.token_path = "../../credentials/slack_oauth_token.json"
 
     create_service(cfg)
 
