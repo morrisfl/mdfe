@@ -79,7 +79,8 @@ python -m pip install -e .
 ```
 #### 5. Setup Google Drive access (optional)
 In order to automatically upload checkpoints to Google Drive, you need to create a Google Drive API key. 
-Setup instructions can be found [here](src/utils/GOOGLE_DRIVE.md).
+Setup instructions can be found [here](src/utils/GOOGLE_DRIVE.md). If you don't want to upload checkpoints to Google Drive,
+please set the `MODEL.cloud_upload` parameter in the configuration file to `False`.
 
 ## II. Data Preparation
 In the process of fine-tuning/linear probing the embedding models, different datasets and dataset combinations can be used.
