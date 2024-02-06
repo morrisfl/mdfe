@@ -10,7 +10,6 @@ from tqdm import tqdm
 
 from model import get_inference_model
 from utils.google_drive import google_drive_upload
-from utils.slack_bot import send_message
 from train_pipeline.optimizer import SAM
 
 
@@ -172,7 +171,7 @@ def save_inf_model(config, model, model_name, logger):
 
         try:
             google_drive_upload(config, zip_path, logger)
-            send_message(config, f"Model {model_name} uploaded to Google Drive!")
+            logger.info(f"Model {model_name} uploaded to Google Drive!")
             os.remove(zip_path)
             os.remove(path)
         except Exception as e:

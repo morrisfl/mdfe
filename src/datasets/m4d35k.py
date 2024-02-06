@@ -17,7 +17,7 @@ class M4D35k(Dataset):
             offset (int, optional): Offset of class labels.
         """
         self.root = root
-        self.df = pd.read_csv(os.path.join(self.root, "m4d-35k.csv"), nrows=data_amount)
+        self.df = pd.read_csv(os.path.join(self.root, "m4d-35k_train.csv"), nrows=data_amount)
         self.class_ids = sorted(list(self.df["label"].unique()))
         self.num_classes = len(self.class_ids)
 

@@ -49,9 +49,9 @@ _C.MODEL.HEAD.t_alpha = 1.0  # Hyperparameter for the AdaFace head.
 _C.DATASET = CN()
 _C.DATASET.root = "/data"  # Root directory of the datasets.
 _C.DATASET.names = ["m4d-35k"]  # List of datasets names to include in the train_pipeline
-_C.DATASET.cls_dist_file = "data/m4d-35k_samples_per_cls.csv" # File with the number of samples per class of the
+_C.DATASET.cls_dist_file = "data/m4d-35k_samples_per_cls.csv"  # File with the number of samples per class of the
 # training dataset. If the path does not exist, the file will be created. Is needed to calculate margin values for the
-# Custom Loss.
+# DynM-ArcFace.
 
 # DataLoader
 _C.DATALOADER = CN()
@@ -113,16 +113,9 @@ _C.GOOGLE_DRIVE = CN()
 _C.GOOGLE_DRIVE.api_name = "drive"  # Name of the api to use.
 _C.GOOGLE_DRIVE.api_version = "v3"  # Version of the api to use.
 _C.GOOGLE_DRIVE.scope = ["https://www.googleapis.com/auth/drive"]  # Scope of the api to use.
-_C.GOOGLE_DRIVE.folder_id = "1_R1RCswNkTweal7Qp4iIlIC_NPzarNsf"  # Folder ID in GD where the model will be saved.
+_C.GOOGLE_DRIVE.folder_id = ""  # Folder ID in GD where the model will be saved.
 _C.GOOGLE_DRIVE.client_secret_path = "credentials/client_secret.json"  # Path to the client_secret.json file.
 _C.GOOGLE_DRIVE.token_path = "credentials/token_drive_v3.pickle"  # Path to the token.pickle file.
-
-# -----------------------------------------------------------------------------
-# Slack bot settings
-# -----------------------------------------------------------------------------
-_C.SLACK = CN()
-_C.SLACK.token_path = "credentials/slack_oauth_token.json"  # Path to the slack api token.
-_C.SLACK.channel_id = "@morris.florek"  # Channel to send the messages to.
 
 
 def get_cfg_defaults():
