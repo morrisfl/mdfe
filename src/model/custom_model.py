@@ -7,7 +7,7 @@ from model.neck import Neck
 
 
 class TrainModel(nn.Module):
-    def __init__(self, config, classes, cls_dist):
+    def __init__(self, config, classes, cls_dist=None):
         super(TrainModel, self).__init__()
         self.backbone = get_foundational_model(config)
         try:

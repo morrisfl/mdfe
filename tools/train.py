@@ -55,7 +55,6 @@ if __name__ == '__main__':
 
     # Dataset and Dataloader
     dataset_train, classes = build_dataset(cfg)
-    cls_dist = get_num_samples_per_cls(dataset_train, cfg.DATASET.cls_dist_file)
     logger.info(f"Dataset: Number of samples: {len(dataset_train)} | Number of classes: {classes}")
     train_loader = DataLoader(dataset_train, batch_size=cfg.DATALOADER.batch_size, shuffle=True,
                               num_workers=cfg.DATALOADER.num_workers)
@@ -68,7 +67,12 @@ if __name__ == '__main__':
     logger.info(f"Using device: {device}")
 
     # Model
-    train_model = TrainModel(cfg, classes, cls_dist)
+    if cfg.MODEL.HEAD.name == "DynM-ArcFace":
+        cls_dist = get_num_samples_per_cls(dataset_train, cfg.DATASET.cls_dist_file)
+        train_model = TrainModel(cfg, classes, cls_dist)
+    else:
+        train_model = TrainModel(cfg, classes)
+
     if cfg.MODEL.BACKBONE.freeze_backbone:
         train_model.freeze_backbone()
 
