@@ -4,7 +4,7 @@ import random
 
 def generate_name(config):
     model_id = random.randint(1, 99999)
-    backbone = f"{config.MODEL.BAACKBONE.type}-{config.MODEL.BAACKBONE.network_arch.lower()}"
+    backbone = f"{config.MODEL.BACKBONE.type}-{config.MODEL.BACKBONE.network_arch.lower()}"
     head = f"{config.MODEL.HEAD.name.lower()}{config.MODEL.HEAD.k}"
     transforms = f"{config.TRANSFORM.name}-aug"
     optimizer = config.OPTIMIZER.name.lower()
