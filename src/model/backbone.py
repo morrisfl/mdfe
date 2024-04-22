@@ -111,7 +111,7 @@ class OpenClipConvNext(nn.Module):
 class SigLIPViT(nn.Module):
     def __init__(self, model_name):
         super().__init__()
-        self.vit = timm.create_model(model_name, pretrained=False)
+        self.vit = timm.create_model(model_name, pretrained=True)
         self.img_size = self.vit.default_cfg["input_size"][-1]
         self.out_dim = self.vit.num_features
         self.mean = self.vit.default_cfg["mean"]
